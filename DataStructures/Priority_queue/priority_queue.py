@@ -23,3 +23,15 @@ def default_compare_higher_value(father_node, child_node):
     if pqe.get father_node
 
 def default_compare_lower_value(father_node, child_node):
+
+
+
+
+def is_empty(my_heap):
+    empty=False
+    if my_heap["size"]=0:
+        empty=True
+        return True
+    return empty
+
+    
