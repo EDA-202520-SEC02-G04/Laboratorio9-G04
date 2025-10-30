@@ -38,5 +38,8 @@ def is_empty(my_heap):
         return True
     return False
 
-def exchange():
-    
+def exchange(my_heap, i, j):
+    temp = my_heap['elements']['elements'][i]
+    my_heap['elements']['elements'][i] = my_heap['elements']['elements'][j]
+    my_heap['elements']['elements'][j] = temp
+    return my_heap
