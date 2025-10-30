@@ -1,5 +1,4 @@
 from DataStructures.Priority_queue import pq_entry as pqe
-
 def new_heap(is_min_pq=True):
     if is_min_pq:
         return {
@@ -40,3 +39,4 @@ def is_empty(my_heap):
     return False
 
 def exchange():
+    
