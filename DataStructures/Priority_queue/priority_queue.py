@@ -35,10 +35,8 @@ def priority(my_heap, parent, child):
     return my_heap["cmp_function"](parent, child)
 
 def is_empty(my_heap):
-    empty=False
     if my_heap["size"]==0:
-        empty=True
         return True
-    return empty
+    return False
 
 def exchange():
