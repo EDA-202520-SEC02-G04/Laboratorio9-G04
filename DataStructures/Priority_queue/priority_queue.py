@@ -1,22 +1,20 @@
 from DataStructures.Priority_queue import pq_entry as pqe
+from DataStructures.List import array_list as al
+
 def new_heap(is_min_pq=True):
+    heap = {
+        "elements": al.new_list(),
+        "size": 0,
+        "cmp_function": None
+    }
+    
+    pareja_invalida = pqe.new_pq_entry(None, None)
+    al.add_first(heap['elements'], pareja_invalida)
     if is_min_pq:
-        return {
-            'elements': {
-                 'elements': [None],
-                'size': 1
-            },
-            'size': 0,
-            'cmp_function': default_compare_lower_value()
-        }
-    return {
-            'elements': {
-                 'elements': [None],
-                'size': 1
-            },
-            'size': 0,
-            'cmp_function': default_compare_higher_value()
-        }
+        heap['cmp_function'] = default_compare_lower_value
+    else:
+        heap['cmp_function'] = default_compare_higher_value
+    return heap
     
 def default_compare_higher_value(father_node, child_node):
     if pqe.get_priority(father_node) >= pqe.get_priority(child_node):
@@ -38,5 +36,3 @@ def is_empty(my_heap):
         return True
     return False
 
-def exchange():
-    
