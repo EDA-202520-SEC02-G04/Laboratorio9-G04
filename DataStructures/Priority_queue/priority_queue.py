@@ -41,4 +41,4 @@ def is_empty(my_heap):
         return True
     return empty
 
-    
+def exchange():
