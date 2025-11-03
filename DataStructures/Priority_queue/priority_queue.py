@@ -81,14 +81,17 @@ def sink(my_heap, k):
 def remove(my_heap):
     if is_empty(my_heap):
         return None
-    top = al.get_element(my_heap["elements"], 1)
-    last = al.get_element(my_heap["elements"], size(my_heap))
-    al.change_info(my_heap["elements"], 1, last)
-    al.remove_last(my_heap["elements"])
-    my_heap["size"] -= 1
-    if not is_empty(my_heap):
-        sink(my_heap, 1)
-    return top
+    else:
+        elementos = my_heap["elements"]["elements"]
+        top_entry = elementos[1]
+        last_entry = elementos[size(my_heap)]
+        elementos[1] = last_entry 
+        al.remove_last(my_heap["elements"])
+        my_heap["size"] -= 1
+        if not is_empty(my_heap):
+            sink(my_heap, 1)
+
+        return pqe.get_value(top_entry)
 
 def get_first_priority(my_heap):
     if is_empty(my_heap):
@@ -105,7 +108,12 @@ def index_of_value(my_heap, value):
     return None
 
 def is_present_value(my_heap, value):
-    return index_of_value(my_heap, value) is not None
+    n = size(my_heap) 
+    elementos = my_heap["elements"]["elements"]
+    for i in range(1, n + 1):
+        if elementos[i]["value"] == value:
+            return True
+    return False
 
 def contains(my_heap, value):
     return is_present_value(my_heap, value)
