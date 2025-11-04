@@ -108,15 +108,19 @@ def index_of_value(my_heap, value):
     return None
 
 def is_present_value(my_heap, value):
-    n = size(my_heap) 
-    elementos = my_heap["elements"]["elements"]
-    for i in range(1, n + 1):
-        if elementos[i]["value"] == value:
-            return True
-    return False
+    if my_heap is None or size(my_heap) == 0:
+        return -1
+    elemento = my_heap["elements"]["elements"]
+    for i in range(1 , size(my_heap)+1):
+        if elemento[i]["value"] == value:
+            return i
+    return -1
 
 def contains(my_heap, value):
-    return is_present_value(my_heap, value)
+    if is_present_value(my_heap,value) == -1:
+        return False
+    else:
+        return True
 
 def improve_priority(my_heap, value, new_priority):
     i = index_of_value(my_heap, value)
