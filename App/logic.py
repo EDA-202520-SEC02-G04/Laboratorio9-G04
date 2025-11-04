@@ -28,8 +28,9 @@ import csv
 import time
 import os
 
-# TODO Realice la importación de priority queue
-# TODO Realice la importación de ArrayList (al) o SingleLinked (sl) como estructura de datos auxiliar para sus requerimientos
+from DataStructures.Priority_queue import priority_queue as pq
+from DataStructures.List import array_list as al
+from DataStructures.List import single_linked_list as sl
 
 
 data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/singapur_bus_routes/'
@@ -49,8 +50,8 @@ def new_logic():
         'routes_pq': None
     }
     
-    analyzer['stops'] = None #TODO completar la creación de la lista
-    analyzer['routes_pq'] = None #TODO completar la creación de la cola de prioridad
+    analyzer['stops'] = al.new_list() #TODO completar la creación de la lista
+    analyzer['routes_pq'] = pq.new_heap() #TODO completar la creación de la cola de prioridad
 
     return analyzer
 
@@ -111,8 +112,18 @@ def add_stop(analyzer, stop):
     #         'priority': stop['WD_FirstBus']
     #     }
     #     pq.insert(analyzer['pq'], element['priority'], element)
+    if stop['StopSequence'] == '1':  # Es texto, ya que viene del CSV
+        element = {
+            'route_id': stop['ServiceNo'],
+            'direction': stop['Direction'],
+            'priority': stop['WD_FirstBus']
+        }
+        # Insertar en la cola con prioridad según la hora de salida
+        pq.insert(analyzer['routes_pq'], element['priority'], element)
 
     return analyzer
+
+    
 
 
 # ___________________________________________________
@@ -164,5 +175,11 @@ def get_next_route(analyzer):
     # pq.delMin(analyzer['pq'])
     # return next_route
 
-    pass
+    if pq.is_empty(analyzer['routes_pq']):
+        return None
+
+    
+    next_route = pq.remove(analyzer['routes_pq'])
+
+    return next_route
 
